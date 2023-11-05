@@ -7,26 +7,23 @@ import { ImgType } from "./types";
 
 const App = () => {
   const [img_gallery, setImage_gallery] = useState<ImgType[]>(
-    gallery.map((img, id) => ({ selected: false, img, id }))
+    gallery.map((img, id) => ({ select_for_delete: false, img, id }))
   );
 
   const [selected_images, setSelected_images] = useState(0);
-  // const selected_images = useRef(0);
 
   const handleDelete = () => {
-    setImage_gallery((prev) => prev.filter((img) => !img.selected));
+    setImage_gallery((prev) => prev.filter((img) => !img.select_for_delete));
     setSelected_images(0);
   };
 
   const handleChange = (index: number) => {
-    console.log(index);
-
     const temp = [...img_gallery];
-    temp[index]["selected"] = !temp[index]["selected"];
+    temp[index]["select_for_delete"] = !temp[index]["select_for_delete"];
 
     let temp_selected_items = 0;
     temp.map((item) => {
-      if (item.selected) {
+      if (item.select_for_delete) {
         temp_selected_items += 1;
       }
     });
@@ -42,15 +39,15 @@ const App = () => {
         <ReactSortable
           animation={200}
           delay={2}
-          swap
           list={img_gallery}
           setList={setImage_gallery}
           className="mt-5 grid grid-rows-3 gap-2 grid-cols-5 max-md:grid-cols-2 max-sm:grid-cols-1"
         >
-          {img_gallery.map((imgObj) => {
+          {img_gallery.map((imgObj, index) => {
             return (
               <ImageWithInput
-                key={imgObj.id}
+                index={index}
+                key={imgObj.img}
                 {...imgObj}
                 handleChange={handleChange}
               />

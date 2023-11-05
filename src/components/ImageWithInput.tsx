@@ -2,8 +2,8 @@ import { ImageWithInputType } from "../types";
 
 const ImageWithInput = ({
   img,
-  selected,
-  id,
+  select_for_delete,
+  index,
   handleChange,
 }: ImageWithInputType) => {
   return (
@@ -12,8 +12,8 @@ const ImageWithInput = ({
       className={`group relative bg-white rounded-lg min-h-[160px] cursor-pointer first:col-span-2 first:row-span-2 max-sm:first:col-span-1 max-sm:first:row-span-1`}
     >
       <input
-        onChange={() => handleChange(id)}
-        defaultChecked={selected}
+        onChange={() => handleChange(index)}
+        defaultChecked={select_for_delete}
         id="checked-checkbox"
         type="checkbox"
         value=""
@@ -22,7 +22,7 @@ const ImageWithInput = ({
       <img
         src={img}
         className={`${
-          selected && "opacity-30"
+          select_for_delete && "opacity-30"
         } w-full h-full object-contain rounded-md group-hover:brightness-50 transition-all ease-in-out`}
       />
     </div>
