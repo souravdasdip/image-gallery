@@ -1,13 +1,13 @@
 import { IHeaderType } from "../types";
 
-const Header = ({ selected_images, handleDelete }: IHeaderType) => {
+const Header = ({ img_gallery, handleDelete }: IHeaderType) => {
+  let img_length = img_gallery.filter((img) => img.select_for_delete).length;
+
   return (
     <>
-      {selected_images > 0 ? (
+      {img_length > 0 ? (
         <div className="flex justify-between">
-          <h2 className="text-xl font-bold">
-            {selected_images} Files Selected
-          </h2>
+          <h2 className="text-xl font-bold">{img_length} Files Selected</h2>
 
           <span
             onClick={handleDelete}

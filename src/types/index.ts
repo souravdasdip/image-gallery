@@ -10,6 +10,6 @@ export interface ImageWithInputType extends ImgType {
 }
 
 export interface IHeaderType {
-  selected_images: number;
+  img_gallery: ImgType[];
   handleDelete: () => void;
 }

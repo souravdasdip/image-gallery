@@ -10,32 +10,20 @@ const App = () => {
     gallery.map((img, id) => ({ select_for_delete: false, img, id }))
   );
 
-  const [selected_images, setSelected_images] = useState(0);
-
   const handleDelete = () => {
     setImage_gallery((prev) => prev.filter((img) => !img.select_for_delete));
-    setSelected_images(0);
   };
 
   const handleChange = (index: number) => {
     const temp = [...img_gallery];
     temp[index]["select_for_delete"] = !temp[index]["select_for_delete"];
-
-    let temp_selected_items = 0;
-    temp.map((item) => {
-      if (item.select_for_delete) {
-        temp_selected_items += 1;
-      }
-    });
-
-    setSelected_images(temp_selected_items);
     setImage_gallery(temp);
   };
 
   return (
     <main className="min-h-screen w-screen bg-slate-300 ">
       <section className="p-10 max-lg:p-2 w-[70%] max-lg:w-[90%] mx-auto">
-        <Header selected_images={selected_images} handleDelete={handleDelete} />
+        <Header img_gallery={img_gallery} handleDelete={handleDelete} />
         <ReactSortable
           animation={200}
           delay={2}
